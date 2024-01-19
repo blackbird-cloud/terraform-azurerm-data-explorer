@@ -14,8 +14,8 @@ sections:
     - modules
 
 content: |-
-  # <Cloud> <Main resource> Terraform module
-  A Terraform module which configures your <Cloud> <Main resource>. <Relevant docs>
+  # Azure Data Explorer Terraform module
+  A Terraform module which configures your Azure Data Explorer. https://learn.microsoft.com/en-us/azure/data-explorer/
   {{ .Header }}
 
   ## Example
