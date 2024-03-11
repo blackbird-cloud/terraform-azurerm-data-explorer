@@ -138,7 +138,15 @@ resource "azurerm_private_endpoint" "default" {
   resource_group_name           = var.private_endpoint.resource_group_name
   subnet_id                     = var.private_endpoint.subnet_id
   custom_network_interface_name = var.private_endpoint.custom_network_interface_name
-  tags                          = var.tags
+
+  dynamic "private_dns_zone_group" {
+    for_each = var.private_endpoint.private_dns_zone_groups
+    content {
+      name                 = private_dns_zone_group.value.name
+      private_dns_zone_ids = private_dns_zone_group.value.private_dns_zone_ids
+    }
+  }
+  tags = var.tags
   private_service_connection {
     name                           = "data-explorer-${var.cluster_name}"
     is_manual_connection           = false

@@ -66,6 +66,10 @@ variable "private_endpoint" {
     resource_group_name           = string
     subnet_id                     = string
     custom_network_interface_name = optional(string)
+    private_dns_zone_groups = optional(list(object({
+      name                 = string,
+      private_dns_zone_ids = list(string)
+    })), [])
   })
   default = {
     create              = false
