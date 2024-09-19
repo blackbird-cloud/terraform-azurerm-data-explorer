@@ -1,6 +1,8 @@
-# Azure Data Explorer Terraform module
-A Terraform module which configures your Azure Data Explorer. https://learn.microsoft.com/en-us/azure/data-explorer/
-[![blackbird-logo](https://raw.githubusercontent.com/blackbird-cloud/terraform-module-template/main/.config/logo_simple.png)](https://www.blackbird.cloud)
+<!-- BEGIN_TF_DOCS -->
+# Terraform Azurerm Data Explorer Module
+Terraform module to create an Azure Data Explorer
+
+[![blackbird-logo](https://raw.githubusercontent.com/blackbird-cloud/terraform-module-template/main/.config/logo_simple.png)](https://blackbird.cloud)
 
 ## Example
 ```hcl
@@ -79,7 +81,7 @@ module "data_explorer" {
 | <a name="input_encryption_key"></a> [encryption\_key](#input\_encryption\_key) | (Optional) Specifies the encryption key to use for the cluster. | <pre>object({<br>    key_name     = string<br>    key_vault_id = string<br>    key_version  = string<br>  })</pre> | `null` | no |
 | <a name="input_identity"></a> [identity](#input\_identity) | (Optional) Specifies the type of Managed Service Identity, and optionally a list of User Assigned Managed Identity IDs to be assigned to this Kusto Cluster. | <pre>object({<br>    type         = string<br>    identity_ids = optional(list(string))<br>  })</pre> | <pre>{<br>  "type": "SystemAssigned"<br>}</pre> | no |
 | <a name="input_location"></a> [location](#input\_location) | (Required) The location where the Kusto Cluster should be created. Changing this forces a new resource to be created. | `string` | n/a | yes |
-| <a name="input_private_endpoint"></a> [private\_endpoint](#input\_private\_endpoint) | Configuration for the creation of a private endpoint for the kusto cluster. | <pre>object({<br>    create                        = bool<br>    location                      = string<br>    resource_group_name           = string<br>    subnet_id                     = string<br>    custom_network_interface_name = optional(string)<br>  })</pre> | <pre>{<br>  "create": false,<br>  "location": "",<br>  "resource_group_name": "",<br>  "subnet_id": ""<br>}</pre> | no |
+| <a name="input_private_endpoint"></a> [private\_endpoint](#input\_private\_endpoint) | Configuration for the creation of a private endpoint for the kusto cluster. | <pre>object({<br>    create                        = bool<br>    location                      = string<br>    resource_group_name           = string<br>    subnet_id                     = string<br>    custom_network_interface_name = optional(string)<br>    private_dns_zone_groups = optional(list(object({<br>      name                 = string,<br>      private_dns_zone_ids = list(string)<br>    })), [])<br>  })</pre> | <pre>{<br>  "create": false,<br>  "location": "",<br>  "resource_group_name": "",<br>  "subnet_id": ""<br>}</pre> | no |
 | <a name="input_public_network_access_enabled"></a> [public\_network\_access\_enabled](#input\_public\_network\_access\_enabled) | (Optional) Is the public network access enabled? Defaults to true. | `bool` | `true` | no |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) Specifies the Resource Group where the Kusto Cluster should exist. Changing this forces a new resource to be created. | `string` | n/a | yes |
 | <a name="input_sku_capacity"></a> [sku\_capacity](#input\_sku\_capacity) | (Optional) Specifies the node count for the cluster. Boundaries depend on the SKU name. | `number` | n/a | yes |
@@ -102,4 +104,5 @@ Checkout our other :point\_right: [terraform modules](https://registry.terraform
 
 ## Copyright
 
-Copyright © 2017-2023 [Blackbird Cloud](https://www.blackbird.cloud)
+Copyright © 2017-2024 [Blackbird Cloud](https://blackbird.cloud)
+<!-- END_TF_DOCS -->
